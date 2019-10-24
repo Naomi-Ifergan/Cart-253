@@ -21,11 +21,11 @@ let bee;
 function setup() {
   createCanvas(windowWidth, windowHeight);
   //set up predators
-  // using WASD keys to move
-  tiger = new Predator(100, 100, 5, color(200, 200, 0), 40,87,83,68,65);
+  // using WASD keys to move and sprint
+  tiger = new Predator(100, 100, 5, color(200, 200, 0), 40,87,83,65,68,16);
   //set up
-  //using arrow keys to move
-  jaguar= new Predator(100,100, 15, color(255,182,193), 50,UP_ARROW,DOWN_ARROW,RIGHT_ARROW,LEFT_ARROW);
+  //using arrow keys to move and sprint
+  jaguar= new Predator(100,100, 15, color(255,182,193), 50,UP_ARROW,DOWN_ARROW,RIGHT_ARROW,LEFT_ARROW,76);
 
   //set up preys
   antelope = new Prey(100, 100, 10, color(255, 100, 10), 50);
@@ -82,5 +82,5 @@ function displayScore(){
   fill(255);
   textSize (50);
   textFont ("Arial");
-  text("Score: " + tiger.preyEaten,width/2,height/2);
+  text("Score: " + (tiger.score+jaguar.score),width/2,height/2);
 }
