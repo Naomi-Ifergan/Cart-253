@@ -65,7 +65,7 @@ function draw() {
   jaguar.handleEating(bee);
 
 
-  // Display all the "animals"
+  // Display all the "animals!"
   tiger.display();
   jaguar.display();
   antelope.display();
