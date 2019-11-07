@@ -10,7 +10,7 @@ class Predator {
   //
   // Sets the initial values for the Predator's properties
   // Either sets default values or uses the arguments provided
-  constructor(x, y, speed, fillColor, radius) {
+  constructor(x, y, speed, radius,img,upKey,downKey,leftKey,rightKey,sprintKey) {
     // Position
     this.x = x;
     this.y = y;
@@ -24,13 +24,18 @@ class Predator {
     this.healthLossPerMove = 0.1;
     this.healthGainPerEat = 1;
     // Display properties
-    this.fillColor = fillColor;
+    // this.fillColor = fillColor;
     this.radius = this.health; // Radius is defined in terms of health
     // Input properties
-    this.upKey = UP_ARROW;
-    this.downKey = DOWN_ARROW;
-    this.leftKey = LEFT_ARROW;
-    this.rightKey = RIGHT_ARROW;
+    this.upKey = upKey;
+    this.downKey = downKey;
+    this.leftKey = leftKey;
+    this.rightKey = rightKey;
+    this.img=img;
+    this.speedSprint=speed+5;
+    this.originalSpeed=speed;
+    this.score=0;
+
   }
 
   // handleInput
@@ -57,6 +62,9 @@ class Predator {
     }
     else {
       this.vy = 0;
+    }
+    if(keyIsDown(this.sprintKey)){
+      this.speed=this.originalSpeed;
     }
   }
 
@@ -102,6 +110,7 @@ class Predator {
   // Takes a Prey object as an argument and checks if the predator
   // overlaps it. If so, reduces the prey's health and increases
   // the predator's. If the prey dies, it gets reset.
+
   handleEating(prey) {
     // Calculate distance from this predator to the prey
     let d = dist(this.x, this.y, prey.x, prey.y);
@@ -126,9 +135,9 @@ class Predator {
   display() {
     push();
     noStroke();
-    fill(this.fillColor);
-    this.radius = this.health;
-    ellipse(this.x, this.y, this.radius * 2);
+
+    imageMode(CENTER);
+    image(this.img,this.x, this.y, this.radius * 2,this.radius * 2);
     pop();
   }
 }
