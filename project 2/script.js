@@ -11,16 +11,19 @@ let zooBackground;
 // Our predator
 let zookeeper;
 
+
 // The three prey
 let antelope;
 let zebra;
 let monkey;
 
+let state = "TITLE";
+// This variable tells us what state the program is in
+
 
 function preload(){
 //placing background image for the game
-zooBackground = loadImage('assets/images/Zoo.jpg');
-
+zooBackground = loadImage('assets/images/zoo.jpg');
 imageZookeeper= loadImage('assets/images/zookeeper.png');
 imageAntelope= loadImage('assets/images/antelope.png');
 imageZebra= loadImage('assets/images/zebra.png');
@@ -36,12 +39,12 @@ function setup() {
   createCanvas(1000,600);
   //Setting up predator (zookeeper)
   //using arrow keys
-  zookeeper= new Predator(100, 100, 5, color(200, 200, 0), 40,UP_ARROW,DOWN_ARROW,LEFT_ARROW,RIGHT_ARROW,imageZookeeper);
+  zookeeper= new Predator(100, 300, 5, 80,imageZookeeper,UP_ARROW,DOWN_ARROW,LEFT_ARROW,RIGHT_ARROW,76);
 
   //Setting up prey
-  antelope = new Prey(100, 100, 10, color(255, 100, 10), 50,imageAntelope);
-  zebra = new Prey(100, 100, 8, color(255, 255, 255), 60,imageZebra);
-  monkey = new Prey(100, 100, 20, color(255, 255, 0), 10,imageMonkey);
+  antelope = new Prey(100, 100, 10, 50,imageAntelope);
+  zebra = new Prey(100, 100, 8, 60,imageZebra);
+  monkey = new Prey(100, 100, 20, 10,imageMonkey);
 }
 
 // draw()
@@ -52,43 +55,65 @@ function draw() {
   imageMode(CENTER);
 image(zooBackground,width/2,height/2, width,height);
 
+  if (state === "TITLE") {
+    displayTitleScreen(); // We will imagine we have a function to show the title stuff
+  }
 
-  // Handle input for the tiger
-  zookeeper.handleInput();
+  else if (state === "PLAY") {
 
-  // Move all the "animals"
-  zookeeper.move();
-  antelope.move();
-  zebra.move();
-  monkey.move();
+    // Handle input for the tiger
+    zookeeper.handleInput();
 
-  // Handle the tiger eating any of the prey
-  zookeeper.handleEating(antelope);
-  zookeeper.handleEating(zebra);
-  zookeeper.handleEating(monkey);
+    // Move all the "animals"
+    zookeeper.move();
+    antelope.move();
+    zebra.move();
+    monkey.move();
 
-  // Display all the "animals"
-  zookeeper.display();
-  antelope.display();
-  zebra.display();
-  monkey.display();
+    // Handle the tiger eating any of the prey
+    zookeeper.handleEating(antelope);
+    zookeeper.handleEating(zebra);
+    zookeeper.handleEating(monkey);
 
-//display the zookeeper's Score
-displayScore();
+    // Display all the "animals"
+    zookeeper.display();
+    antelope.display();
+    zebra.display();
+    monkey.display();
 
-  function displayScore (){
-    textAlign(CENTER,CENTER);
-    fill(255);
-    textSize(50);
-    textFont("Arial");
-    text("Score:" + (zookeeper.score),width/2,height/2);
+  //display the zookeeper's Score
+  displayScore();
+  }
+  else if (state === "GAMEOVER") {
+}
 
-    function startGame(){
-  textSize(30);
-  textAlign(CENTER,CENTER);
-  fill(204,0,0);
-  let startGameText= "Hi there! Welcome to Montreal's largest zoo. I'm Bob, the zookeeper. Unfortunetely, we are closed today due to the escape of the antelopes, zebras and monkeys. Help me catcch them so we an open the zoo! Use the arrow keys to catch them! "
 
 }
+
+  function mousePressed() {
+  if (state === "TITLE") {
+    // If we were on the title we need to switch to instructions
+    state = "PLAY";
   }
+    }
+
+
+
+function displayScore (){
+  textAlign(CENTER,CENTER);
+  fill(255);
+  textSize(50);
+  textFont("Arial");
+  text("Score:" + (zookeeper.score),width/2,height/2);
+}
+
+function displayTitleScreen(){
+rectMode(CENTER);
+fill(250);
+rect(500,300,700,300);
+textSize(20);
+textAlign(CENTER,CENTER);
+fill(0);
+text(" Welcome to Montreal's largest zoo. \n I'm Bob, the zookeeper. \n Unfortunetely, we are closed today due to the escape of some of the animals.\n Help me catch them so we can open the zoo! \n Use the arrow keys to catch them!\n Click to play! ", width/2,height/2)
+
 }
