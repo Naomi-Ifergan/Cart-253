@@ -10,7 +10,7 @@ class Predator {
   //
   // Sets the initial values for the Predator's properties
   // Either sets default values or uses the arguments provided
-  constructor(x, y, speed, radius,img,upKey,downKey,leftKey,rightKey,sprintKey) {
+  constructor(x, y, speed, radius,predatorImage) {
     // Position
     this.x = x;
     this.y = y;
@@ -21,19 +21,18 @@ class Predator {
     // Health properties
     this.maxHealth = radius;
     this.health = this.maxHealth; // Must be AFTER defining this.maxHealth
-    this.healthLossPerMove = 0.1;
+    this.healthLossPerMove = 0.5;
     this.healthGainPerEat = 1;
     // Display properties
     // this.fillColor = fillColor;
     this.radius = this.health; // Radius is defined in terms of health
     // Input properties
-    this.upKey = upKey;
-    this.downKey = downKey;
-    this.leftKey = leftKey;
-    this.rightKey = rightKey;
-    this.img=img;
-    this.speedSprint=speed+5;
-    this.originalSpeed=speed;
+    this.upKey = 38;
+    this.downKey = 40;
+    this.leftKey = 37;
+    this.rightKey = 39;
+    this.sprintKey = 32;
+    this.img= predatorImage;
     this.score=0;
 
   }
@@ -64,7 +63,7 @@ class Predator {
       this.vy = 0;
     }
     if(keyIsDown(this.sprintKey)){
-      this.speed=this.originalSpeed;
+      this.speed=this.speed + 5;
     }
   }
 
@@ -82,6 +81,7 @@ class Predator {
     this.health = constrain(this.health, 0, this.maxHealth);
     // Handle wrapping
     this.handleWrapping();
+    console.log(this.radius);
   }
 
   // handleWrapping
@@ -123,6 +123,7 @@ class Predator {
       prey.health -= this.healthGainPerEat;
       // Check if the prey died and reset it if so
       if (prey.health < 0) {
+        zookeeper.score = zookeeper.score + 1;
         prey.reset();
       }
     }
@@ -135,9 +136,12 @@ class Predator {
   display() {
     push();
     noStroke();
-
     imageMode(CENTER);
-    image(this.img,this.x, this.y, this.radius * 2,this.radius * 2);
+    this.radius = this.health;
+    if (this.radius > 1){
+        image(this.img,this.x, this.y, this.radius * 2,this.radius * 2);
+    }
+
     pop();
   }
 }
