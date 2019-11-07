@@ -22,7 +22,6 @@ let lion;
 let state = "TITLE";
 let prey=[];
 let numPrey = 100;
-console.log("asdasd");
 
 // This variable tells us what state the program is in
 
@@ -48,12 +47,12 @@ function setup() {
   createCanvas(1000,600);
   //Setting up predator (zookeeper)
   //using arrow keys
-  zookeeper= new Predator(100, 300, 5, 80,imageZookeeper);
+  zookeeper= new Predator(100, 300, 5, 100,imageZookeeper);
 
 let preyImages = [imageAntelope,imageZebra,imageMonkey,imageTiger,imageLion];
   //Setting up prey
-  antelope = new Prey(100, 100, 10, 50,imageAntelope);
-  zebra = new Prey(100, 100, 8, 60,imageZebra);
+  antelope = new Prey(100, 100, 10, 40,imageAntelope);
+  zebra = new Prey(100, 100, 8, 35,imageZebra);
   monkey = new Prey(100, 100, 20, 10,imageMonkey);
   tiger = new Prey (100, 100,10, 30,imageTiger);
   lion = new Prey (100,100, 15,20,imageLion);
@@ -123,8 +122,16 @@ for (let i = 0; i< prey.length; i++) {
     displayGameOver();
 }
 
-
 }
+
+function mousePressed() {
+if (state === "GAMEOVER") {
+  // If we are on the gameover page, we want to play again
+  state = "PLAY";
+  //It's not working:( 
+}
+  }
+
 
   function mousePressed() {
   if (state === "TITLE") {
@@ -136,10 +143,10 @@ for (let i = 0; i< prey.length; i++) {
 
 function displayScore (){
   textAlign(CENTER,CENTER);
-  fill(255);
+  fill(0);
   textSize(50);
   textFont("Arial");
-  text("Score:" + (zookeeper.score),width/2,height/2);
+  text("Score:" + (zookeeper.score),width/2,30);
 }
 
 function displayTitleScreen(){
@@ -153,10 +160,10 @@ text(" Welcome to Montreal's largest zoo. \n I'm Bob, the zookeeper. \n Unfortun
 }
 function displayGameOver(){
   rectMode(CENTER);
-  fill(250);
-  rect(100,100,100,100);
-  textSize(50);
-  textAlign(CENTER,CENTER);
   fill(204,0,0);
-  text("GAMEOVER!\n You failed to catch all the animals. \n Thanks for trying! \n Refresh to play again")
+  rect(500,300,700,300);
+  textSize(20);
+  textAlign(CENTER,CENTER);
+  fill(0);
+  text("GAMEOVER!\n You failed to catch all the animals. \n Thanks for trying! \n Refresh to play again", width/2,height/2)
 }
