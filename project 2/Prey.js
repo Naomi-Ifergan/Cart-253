@@ -72,7 +72,6 @@ class Prey {
 
   // display
   //
-  // Draw the prey as an ellipse on the canvas
   // with a radius the same size as its current health.
   display() {
     push();

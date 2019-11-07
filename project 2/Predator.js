@@ -24,7 +24,6 @@ class Predator {
     this.healthLossPerMove = 0.1;
     this.healthGainPerEat = 1;
     // Display properties
-    // this.fillColor = fillColor;
     this.radius = this.health; // Radius is defined in terms of health
     // Input properties
     this.upKey = 38;
@@ -131,8 +130,7 @@ class Predator {
 
   // display
   //
-  // Draw the predator as an ellipse on the canvas
-  // with a radius the same size as its current health.
+  // predator's radius is the same size as its current health.
   display() {
     push();
     noStroke();
