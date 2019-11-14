@@ -13,6 +13,9 @@ let nbaPlayer;
 // The three prey
 let basketball;
 
+// introduction page
+let state = "TITLE";
+
 //arrays
 //the number of preys that will be simulated
 let prey=[];
@@ -28,7 +31,6 @@ nbaPlayerImg = loadImage('assets/images/nbaPlayer.png');
 //placing basketball (prey)
 basketballImg = loadImage('assets/images/basketball.png');
 }
-
 // setup()
 //
 // Sets up a canvas
@@ -69,20 +71,84 @@ for (let i = 0; i< prey.length; i++) {
   prey[i].move();
   prey[i].display();
 }
+if (state === "TITLE") {
+   displayTitleScreen(); // We will imagine we have a function to show the title stuff
+ }
 
-  // Handle input for the tiger
+ else if (state === "PLAY") {
+
+
+  // Handle input for the nbaPlayer
   nbaPlayer.handleInput();
 
-  // Move all the "animals"
+  // Move the player and basketballs
   nbaPlayer.move();
   basketball.move();
 
-  // Handle the tiger eating any of the prey
+  // Handle the player "eating" the prey (basketballs)
   nbaPlayer.handleEating(basketball);
 
 
-  // Display all the "animals"
+  // Display the player and the basketballs
   nbaPlayer.display();
   basketball.display();
+
+  //display the nbaPlayer's Score
+    displayScore();
+    if (nbaPlayer.health== 0) {
+      state= "GAMEOVER"
+    }
+    }
+    else if (state === "GAMEOVER") {
+      displayGameOver();
+  }
+
+  }
+
+  function mousePressed() {
+  if (state === "GAMEOVER") {
+    // If we are on the gameover page, we want to play again
+    state = "PLAY";
+
+  }
+    }
+
+
+    function mousePressed() {
+    if (state === "TITLE") {
+      // If we were on the title we need to switch to instructions
+      state = "PLAY";
+    }
+      }
+
+  //display the score throughout the game
+  function displayScore (){
+    textAlign(CENTER,CENTER);
+    fill(0);
+    textSize(50);
+    textFont("Arial");
+    text("Score:" + (zookeeper.score),width/2,30);
+  }
+
+  // Introduction page
+  function displayTitleScreen(){
+  ecllipseMode(CENTER);
+  fill(255,140,0); //orange
+  ecllipse(500,300,700,300);
+  textSize(20);
+  textAlign(CENTER,CENTER);
+  fill(0);
+  text("Hey there basketball fan, welcome to my court! \n ", width/2,height/2)
+  }
+  //Gameover page
+  function displayGameOver(){
+    rectMode(CENTER);
+    fill(204,0,0);
+    rect(500,300,700,300);
+    textSize(20);
+    textAlign(CENTER,CENTER);
+    fill(0);
+    text("GAMEOVER!", width/2,height/2)
+  }
 
 }
