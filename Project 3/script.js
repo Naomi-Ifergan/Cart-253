@@ -23,10 +23,10 @@ function preload(){
 courtBackground = loadImage('assets/images/court.jpg');
 
 //placing nbaPlayer (predator)
-nbaPlayer = loadImage('assets/images/nbaPlayer.png');
+nbaPlayerImg = loadImage('assets/images/nbaPlayer.png');
 
 //placing basketball (prey)
-basketball = loadImage('assets/images/basketball.png');
+basketballImg = loadImage('assets/images/basketball.png');
 }
 
 // setup()
@@ -34,14 +34,14 @@ basketball = loadImage('assets/images/basketball.png');
 // Sets up a canvas
 // Creates objects for the predator and three prey
 function setup() {
-  createCanvas(1000,600);
+  createCanvas(500,500);
   //set up predator and prey
-  nbaPlayer = new Predator(100, 100, 5, 40,imageNbaPlayer);
-  basketball = new Prey(100, 100, 10, 50,imageBasketball);
+  nbaPlayer = new Predator(100, 100, 5, 100,nbaPlayerImg);
+  basketball = new Prey(100, 100, 10, 50, basketballImg);
 
-  let preyImages = [imageBasketball];
+  let preyImage = [basketballImg];
     //Setting up prey
-   basketball = new Prey(100, 100, 10, 40,imageBasketball);
+   basketball = new Prey(100, 100, 10, 40,basketballImg);
 
    //arrays
    for (let i = 0; i < numPrey; i++) {
@@ -50,7 +50,7 @@ function setup() {
      let preySpeed = random (2,10);
      let preyRadius = random (3,50);
      let randomIndex = floor (random(0,5));
-     let newPrey = new Prey (preyX, preyY, preySpeed, preyRadius, preyImages[randomIndex]);
+     let newPrey = new Prey (preyX, preyY, preySpeed, preyRadius, preyImage[randomIndex]);
      prey.push(newPrey);
    }
  }

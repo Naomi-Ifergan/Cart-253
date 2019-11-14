@@ -31,7 +31,7 @@ class Predator {
     this.leftKey = 37;
     this.rightKey = 39;
     this.sprintKey = 32;
-    this.img = predatorImages;
+    this.img = predatorImage;
     this.score=0;
   }
 
@@ -136,7 +136,7 @@ class Predator {
     imageMode(CENTER);
     this.radius = this.health;
     if (this.radius > 1){
-      image(this.img,this.x, this.y, this.radius * 2 this.radius * 2);
+      image(this.img,this.x, this.y, this.radius * 2, this.radius * 2);
     }
     pop();
   }
