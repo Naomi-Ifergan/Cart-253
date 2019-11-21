@@ -10,7 +10,7 @@ class Predator {
   //
   // Sets the initial values for the Predator's properties
   // Either sets default values or uses the arguments provided
-  constructor(x, y, speed, radius,nbaPlayerImage) {
+  constructor(x, y, speed, radius,upKey,downKey,leftKey,rightKey,sprintKey,nbaPlayerImage) {
     // Position
     this.x = x;
     this.y = y;
@@ -26,14 +26,16 @@ class Predator {
     // Display properties
     this.radius = this.health; // Radius is defined in terms of health
     // Input properties
-    this.upKey = 38;
-    this.downKey = 40;
-    this.leftKey = 37;
-    this.rightKey = 39; 
-    this.sprintKey = 32; // space key
+    this.upKey = upKey;
+    this.downKey = downKey;
+    this.leftKey = leftKey
+    this.rightKey = rightKey;
+    this.sprintKey = sprintKey; // space key
+    this.speedSprint = speed + 2;
+    this.originalSpeed = speed;
     this.img = nbaPlayerImage;
-    this.score=0;
-  }
+    this.score = 0;
+    }
 
   // handleInput
   //
@@ -64,7 +66,7 @@ class Predator {
     if(keyIsDown (this.sprintKey)){
       this.speed=this.speed + 5;
     }
-  }
+    }
 
   // move
   //
@@ -101,7 +103,7 @@ class Predator {
     else if (this.y > height) {
       this.y -= height;
     }
-  }
+    }
 
   // handleEating
   //
@@ -120,11 +122,11 @@ class Predator {
       prey.health -= this.healthGainPerEat;
       // Check if the prey died and reset it if so
       if (prey.health < 0) {
-        nbaPlayer.score = nbaPlayer + 2;
+        this.score = this.score + 2;
         prey.reset();
       }
-    }
-  }
+      }
+      }
 
   // display
   //
@@ -139,5 +141,5 @@ class Predator {
       image(this.img,this.x, this.y, this.radius * 2, this.radius * 2);
     }
     pop();
-  }
-}
+    }
+    }

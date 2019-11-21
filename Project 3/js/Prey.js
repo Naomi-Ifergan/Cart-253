@@ -28,7 +28,7 @@ class Prey {
     // Display properties
     this.radius = this.health;
     this.img = preyImage;
-  }
+    }
 
   // move
   //
@@ -46,7 +46,7 @@ class Prey {
     this.ty += 0.01;
     // Handle wrapping
     this.handleWrapping();
-  }
+    }
 
   // handleWrapping
   //
@@ -67,7 +67,7 @@ class Prey {
     else if (this.y > height) {
       this.y -= height;
     }
-  }
+    }
 
   // display
   //
@@ -75,14 +75,13 @@ class Prey {
   // with a radius the same size as its current health.
   display() {
     push();
-    noStroke();
     imageMode(CENTER);
     this.radius = this.health;
     if(this.radius > 1){
-    image(this.img, this.x, this.y, this.radius * 2);
-  }
+    image(this.img, this.x, this.y, 60, 60);
+    }
     pop();
-  }
+    }
 
   // reset
   //
@@ -96,5 +95,5 @@ class Prey {
     this.health = this.maxHealth;
     // Default radius
     this.radius = this.health;
-  }
-}
+    }
+    }

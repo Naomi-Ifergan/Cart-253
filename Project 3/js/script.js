@@ -50,18 +50,18 @@
   function setup() {
       createCanvas(windowWidth,windowHeight);
       //set up players
-      nbaPlayer = new Predator(100, 100, 5, 100,nbaPlayerImg);
-      player2 = new Predator (200,10,5,100,player2Img);
+      nbaPlayer = new Predator(100, 100, 5, 100,UP_ARROW,DOWN_ARROW,LEFT_ARROW,RIGHT_ARROW,32,nbaPlayerImg);
+      player2 = new Predator (200,10,5,100,87,83,65,68,32,player2Img);
 
       let preyImages = [basketballImg];
-      basketball = new Prey (5,30,7,0, basketballImg);
+      //basketball = new Prey (5,30,7,0, basketballImg);
 
     //arrays
   for (let i= 0; i < numPrey; i++){
       let preyX = random(0, width);
       let preyY = random (0, height);
       let preySpeed = random (2,10);
-      let preyRadius = random (3,50);
+      let preyRadius = 50;
       let randomIndex = floor (random(0,1));
       let newPrey = new Prey (preyX, preyY, preySpeed, preyRadius, preyImages[randomIndex]);
      prey.push(newPrey);
@@ -87,7 +87,7 @@
       if (state === "TITLE") {
        displayTitleScreen();
        // We will imagine we have a function to show the title stuff
-     }
+      }
 
       else if (state === "PLAY") {
 
@@ -101,15 +101,17 @@
       player2.move();
 
       // Handle the player "eating" the prey (basketballs)
-      nbaPlayer.handleEating(basketball);
-      player2.handleEating (basketball);
+      for (let i = 0; i< prey.length; i++) {
+      nbaPlayer.handleEating(prey[i]);
+      player2.handleEating (prey[i]);
+      }
 
       // Display the player and the basketballs
       nbaPlayer.display();
       player2.display();
 
       //display the nbaPlayer's Score
-      displayScore();
+    displayScore();
       if (nbaPlayer.health== 0) {
       state= "GAMEOVER"
       }
@@ -119,14 +121,16 @@
 
       else if (state === "GAMEOVER") {
       displayGameOver();
-      }
-}
+        }
+
+        }
+
   function mousePressed() {
-      if (state === "GAMEOVER") {
-      // If we are on the gameover page, we want to play again
-      state = "PLAY";
-      }
-      }
+        if (state === "GAMEOVER") {
+        // If we are on the gameover page, we want to play again
+          state = "PLAY";
+        }
+        }
 
   function mousePressed() {
         if (state === "TITLE") {
@@ -147,6 +151,7 @@
       }
 
     function displayTitleScreen(){
+      push();
       //Title page
       ellipseMode(CENTER);
       fill(255,140,0); //orange
@@ -155,6 +160,7 @@
       textAlign(CENTER,CENTER);
       fill(0);
       text(" Welcome to my court! \n You have 1 minute to beat your opponent. \n Player 1 use ARROW keys to move. \n Player 2 use WASD keys to move.  \n Click to play!\n ", width/2,height/2)
+      pop();
       }
 
 
