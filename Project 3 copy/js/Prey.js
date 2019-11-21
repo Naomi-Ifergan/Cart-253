@@ -10,8 +10,7 @@ class Prey {
   //
   // Sets the initial values for the Predator's properties
   // Either sets default values or uses the arguments provided
-
-  constructor(x, y, speed, radius,preyImage) {
+  constructor(x, y, speed, fillColor, radius,preyImage) {
     // Position
     this.x = x;
     this.y = y;

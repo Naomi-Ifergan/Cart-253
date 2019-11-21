@@ -37,7 +37,6 @@
 
       //placing basketballs
       basketballImg = loadImage ('assets/images/basketball.png');
-      }
 
       // setup()
       //
@@ -48,7 +47,7 @@
       createCanvas(1000,400);
       //set up players
       nbaPlayer = new Predator(100, 100, 5, 100,nbaPlayerImg);
-      player2 = new Predator (200,10,5,100,player2Img
+      player2 = new Predator (200,10,5,100,player2Img);
 
       let preyImage = [basketballImg];
       basketball = new prey (100,100,10,50, basketballImg);
@@ -70,10 +69,10 @@
       // Handles input, movement, eating, and displaying for the system's objects
 
    function draw() {
-      placing background image
+      // placing background image
       imageMode(CENTER);
       image(courtBackground,width/2,height/2, width,height);
-
+      }
 
       //arrays
     for (let i = 0; i< prey.length; i++) {
@@ -111,7 +110,7 @@
       state= "GAMEOVER"
       }
 
-
+      
       }
 
       else if (state === "GAMEOVER") {
