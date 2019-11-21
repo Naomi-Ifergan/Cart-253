@@ -1,7 +1,8 @@
       // "A minute to win it"
       // by Naomi Ifergan
       //
-      // This game is based on real life basketball. However, the players have 1 minute to score as much as he can before time runs out!
+      // This game is based on real life basketball.
+      // However, the players only have 1 minute to score as much as he can before time runs out!
 
 
       //our background image
@@ -23,7 +24,6 @@
 
       // introduction page
       let state = "TITLE";
-
 
   function preload(){
       //placing background image for the game
@@ -48,18 +48,18 @@
       createCanvas(1000,400);
       //set up players
       nbaPlayer = new Predator(100, 100, 5, 100,nbaPlayerImg);
-      player2 = new Predator (200,10,5,100,player2Img
+      player2 = new Predator (200,10,5,100,player2Img);
 
-      let preyImage = [basketballImg];
-      basketball = new prey (100,100,10,50, basketballImg);
+      let preyImages = [basketballImg];
+      basketball = new Prey (5,30,7,50, basketballImg);
 
     //arrays
-  for (let i= 0; i, numPrey; i++){
+  for (let i= 0; i < numPrey; i++){
       let preyX = random(0, width);
       let preyY = random (0, height);
       let preySpeed = random (2,10);
       let preyRadius = random (3,50);
-      let randomIndex = floor (random(0,5));
+      let randomIndex = floor (random(0,1));
       let newPrey = new Prey (preyX, preyY, preySpeed, preyRadius, preyImages[randomIndex]);
      prey.push(newPrey);
       }
@@ -70,7 +70,7 @@
       // Handles input, movement, eating, and displaying for the system's objects
 
    function draw() {
-      placing background image
+      //placing background image
       imageMode(CENTER);
       image(courtBackground,width/2,height/2, width,height);
 
@@ -117,7 +117,7 @@
       else if (state === "GAMEOVER") {
       displayGameOver();
       }
-
+}
   function mousePressed() {
       if (state === "GAMEOVER") {
       // If we are on the gameover page, we want to play again
@@ -138,7 +138,7 @@
       fill(0);
       textSize(50);
       textFont("Arial");
-      text("Score:" + (nbaPlayer.score),width/2,30);
+      text("Score:" + (nbaPlayer.score),100,100,);
       }
 
     function displayTitleScreen(){
@@ -163,5 +163,5 @@
       fill(0);
       text("GAMEOVER!", width/2,height/2)
 
-      }
+
       }
