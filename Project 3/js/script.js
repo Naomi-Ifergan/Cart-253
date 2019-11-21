@@ -20,10 +20,13 @@
       //arrays
       //number of preys that will be simulated
       let prey = [];
-      let numPrey = 20;
+      let numPrey = 10;
 
       // introduction page
       let state = "TITLE";
+
+     //1 minute timer
+      let countdown;
 
   function preload(){
       //placing background image for the game
@@ -45,13 +48,13 @@
       // Creates objects for the players
 
   function setup() {
-      createCanvas(1000,400);
+      createCanvas(windowWidth,windowHeight);
       //set up players
       nbaPlayer = new Predator(100, 100, 5, 100,nbaPlayerImg);
       player2 = new Predator (200,10,5,100,player2Img);
 
       let preyImages = [basketballImg];
-      basketball = new Prey (5,30,7,50, basketballImg);
+      basketball = new Prey (5,30,7,0, basketballImg);
 
     //arrays
   for (let i= 0; i < numPrey; i++){
@@ -138,7 +141,9 @@
       fill(0);
       textSize(50);
       textFont("Arial");
-      text("Score:" + (nbaPlayer.score),100,100,);
+      text("Team Blue:" + (nbaPlayer.score),1000,50);
+      text("Team Red:" + (player2.score),200,50);
+
       }
 
     function displayTitleScreen(){
@@ -146,10 +151,10 @@
       ellipseMode(CENTER);
       fill(255,140,0); //orange
       ellipse(width/2,height/2,300,300);
-      textSize(20);
+      textSize(15);
       textAlign(CENTER,CENTER);
       fill(0);
-      text("Hey there basketball fans, \n Welcome to my court! \n You have 1 minute to beat your opponent. \n Player 1 use arrow keys to move. \n Player 2 use WASD keys to move. \n Click to play!\n ", width/2,height/2)
+      text(" Welcome to my court! \n You have 1 minute to beat your opponent. \n Player 1 use ARROW keys to move. \n Player 2 use WASD keys to move.  \n Click to play!\n ", width/2,height/2)
       }
 
 
@@ -162,6 +167,4 @@
       textAlign(CENTER,CENTER);
       fill(0);
       text("GAMEOVER!", width/2,height/2)
-
-
       }

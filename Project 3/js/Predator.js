@@ -10,7 +10,7 @@ class Predator {
   //
   // Sets the initial values for the Predator's properties
   // Either sets default values or uses the arguments provided
-  constructor(x, y, speed, radius,predatorImage) {
+  constructor(x, y, speed, radius,nbaPlayerImage) {
     // Position
     this.x = x;
     this.y = y;
@@ -29,9 +29,9 @@ class Predator {
     this.upKey = 38;
     this.downKey = 40;
     this.leftKey = 37;
-    this.rightKey = 39;
-    this.sprintKey = 32;
-    this.img = predatorImage;
+    this.rightKey = 39; 
+    this.sprintKey = 32; // space key
+    this.img = nbaPlayerImage;
     this.score=0;
   }
 

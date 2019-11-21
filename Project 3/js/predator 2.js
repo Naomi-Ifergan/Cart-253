@@ -1,7 +1,7 @@
 // Predator
 //
 // A class that represents a simple predator
-// controlled by the arrow keys. It can move around
+// controlled by the WASD keys. It can move around
 // the screen and consume Prey objects to maintain its health.
 
 class Predator {
@@ -10,7 +10,7 @@ class Predator {
   //
   // Sets the initial values for the Predator's properties
   // Either sets default values or uses the arguments provided
-  constructor(x, y, speed, radius,predatorImage) {
+  constructor(x, y, speed, radius,player2Image) {
     // Position
     this.x = x;
     this.y = y;
@@ -26,12 +26,12 @@ class Predator {
     // Display properties
     this.radius = this.health; // Radius is defined in terms of health
     // Input properties
-    this.upKey = 38;
-    this.downKey = 40;
-    this.leftKey = 37;
-    this.rightKey = 39;
-    this.sprintKey = 32;
-    this.img = predatorImage;
+    this.upKey = 87; // W key code
+    this.downKey = 83; // S key code
+    this.leftKey = 65; // A key code
+    this.rightKey = 68; // D key code
+    this.sprintKey = 32; // space key
+    this.img = player2Image;
     this.score=0;
   }
 
