@@ -31,9 +31,10 @@
       let cheering;
 
   function preload(){
-     cheering = loadSound(["assets/sounds/cheering.ogg"]);
-     
 
+    //sound effects
+     cheering = loadSound(["assets/sounds/cheering.ogg"]);
+     buzzer = loadSound (["assets/sounds/buzzer.ogg"]);
       //placing background image for the game
       courtBackground = loadImage('assets/images/court.jpg');
 
@@ -45,7 +46,7 @@
 
       //placing basketballs
       basketballImg = loadImage ('assets/images/basketball.png');
-}
+      }
 
       // setup()
       //
@@ -55,6 +56,7 @@
   function setup() {
       createCanvas(windowWidth,windowHeight);
       cheering.play();
+
       //set up players
       nbaPlayer = new Predator(1100, 500, 5, 100,UP_ARROW,DOWN_ARROW,LEFT_ARROW,RIGHT_ARROW,32,nbaPlayerImg);
       player2 = new Predator (200,500,5,100,87,83,65,68,32,player2Img);
@@ -152,7 +154,7 @@
       //display the score throughout the game
       textAlign(CENTER,CENTER);
       textSize(50);
-      textFont("Arial");
+      textFont("Colonna MT");
       fill(0,0,179);
       text("Team Blue:" + (nbaPlayer.score),1000,50);
       fill(204,0,0);
@@ -169,18 +171,22 @@
       textSize(15);
       textAlign(CENTER,CENTER);
       fill(0);
-      text(" Welcome to my court! \n You have 1 minute to beat your opponent. \n Player 1 use ARROW keys to move. \n Player 2 use WASD keys to move.  \n Click to play!\n ", width/2,height/2)
+      text(" Welcome to my court! \n You have 1 minute to beat your opponent. \n Player 1 use ARROW keys to move. \n Player 2 use WASD keys to move. \n Avoid collision between players. \n Click to play!\n ", width/2,height/2)
       pop();
       }
 
 
     function displayGameOver(){
       //Gameover page
+      // buzzer sound when game is over
+      buzzer.play();
       ellipseMode(CENTER);
       fill(204,0,0); //red
       ellipse(width/2,height/2,500,500);
       textSize(20);
       textAlign(CENTER,CENTER);
       fill(0);
-      text("GAMEOVER! \n You ran out of time. \n Seems like you couldn't beat you opponent. \n Click to play again", width/2,height/2)
-      }
+      text("GAMEOVER! \n You ran out of time. \n Seems like you couldn't beat you opponent. \n Click to play again", width/2,height/2);
+
+
+}
