@@ -26,9 +26,14 @@
       let state = "TITLE";
 
      //1 minute timer
-      let countdown;
+      let countdown= 60
+
+      let cheering;
 
   function preload(){
+     cheering = loadSound(["assets/sounds/cheering.ogg"]);
+     
+
       //placing background image for the game
       courtBackground = loadImage('assets/images/court.jpg');
 
@@ -40,7 +45,7 @@
 
       //placing basketballs
       basketballImg = loadImage ('assets/images/basketball.png');
-      }
+}
 
       // setup()
       //
@@ -49,9 +54,10 @@
 
   function setup() {
       createCanvas(windowWidth,windowHeight);
+      cheering.play();
       //set up players
-      nbaPlayer = new Predator(100, 100, 5, 100,UP_ARROW,DOWN_ARROW,LEFT_ARROW,RIGHT_ARROW,32,nbaPlayerImg);
-      player2 = new Predator (200,10,5,100,87,83,65,68,32,player2Img);
+      nbaPlayer = new Predator(1100, 500, 5, 100,UP_ARROW,DOWN_ARROW,LEFT_ARROW,RIGHT_ARROW,32,nbaPlayerImg);
+      player2 = new Predator (200,500,5,100,87,83,65,68,32,player2Img);
 
       let preyImages = [basketballImg];
       //basketball = new Prey (5,30,7,0, basketballImg);
@@ -67,6 +73,7 @@
      prey.push(newPrey);
       }
       }
+
 
       // draw()
       //
@@ -105,6 +112,7 @@
       nbaPlayer.handleEating(prey[i]);
       player2.handleEating (prey[i]);
       }
+      nbaPlayer.handleCollision (player2);
 
       // Display the player and the basketballs
       nbaPlayer.display();
@@ -116,11 +124,11 @@
       state= "GAMEOVER"
       }
 
-
       }
 
       else if (state === "GAMEOVER") {
       displayGameOver();
+
         }
 
         }
@@ -139,13 +147,15 @@
         }
         }
 
+
     function displayScore (){
       //display the score throughout the game
       textAlign(CENTER,CENTER);
-      fill(0);
       textSize(50);
       textFont("Arial");
+      fill(0,0,179);
       text("Team Blue:" + (nbaPlayer.score),1000,50);
+      fill(204,0,0);
       text("Team Red:" + (player2.score),200,50);
 
       }
@@ -167,10 +177,10 @@
     function displayGameOver(){
       //Gameover page
       ellipseMode(CENTER);
-      fill(204,0,0);
-      ellipse(width/2,height/2,300,300);
+      fill(204,0,0); //red
+      ellipse(width/2,height/2,500,500);
       textSize(20);
       textAlign(CENTER,CENTER);
       fill(0);
-      text("GAMEOVER!", width/2,height/2)
+      text("GAMEOVER! \n You ran out of time. \n Seems like you couldn't beat you opponent. \n Click to play again", width/2,height/2)
       }

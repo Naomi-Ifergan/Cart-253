@@ -128,7 +128,18 @@ class Predator {
       }
       }
 
-  // display
+  handleCollision(player2) {
+    let d = dist(this.x, this.y, player2.x, player2.y);
+    // Check if the distance is less than their two radii (an overlap)
+    if (d < this.radius + player2.radius) {
+    // Increase predator health and constrain it to its possible range
+    }
+  
+
+    }
+
+
+  // display1
   //
   // Draw the predator as an ellipse on the canvas
   // with a radius the same size as its current health.
