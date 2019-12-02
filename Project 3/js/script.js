@@ -4,6 +4,7 @@
       // This game is based on real life basketball.
       // However, the players only have 1 minute to score as much as he can before time runs out!
 
+// testing
 
       //our background image
       let courtBackground;
