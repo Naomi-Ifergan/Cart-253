@@ -3,8 +3,10 @@
       //
       // This game is based on real life basketball.
       // However, the players only have 1 minute to score as much as he can before time runs out!
-
-// testing
+      //There are 3 ways of losing;
+      // 1. "Injuring" your opponent (coming into the same radius as the other player)
+      // 2. When the the clock runs out of timeout
+      // 3. When one of the player's health = 0
 
       //our background image
       let courtBackground;
@@ -26,8 +28,6 @@
       // introduction page
       let state = "TITLE";
 
-     //1 minute timer
-      let countdown= 60
 
       let cheering;
 
@@ -59,8 +59,8 @@
       cheering.play();
 
       //set up players
-      nbaPlayer = new Predator(1100, 500, 5, 100,UP_ARROW,DOWN_ARROW,LEFT_ARROW,RIGHT_ARROW,32,nbaPlayerImg);
-      player2 = new Predator (200,500,5,100,87,83,65,68,32,player2Img);
+      nbaPlayer = new Predator(1100, 500, 5, 100,UP_ARROW,DOWN_ARROW,LEFT_ARROW,RIGHT_ARROW,nbaPlayerImg);
+      player2 = new Predator (200,500,5,100,87,83,65,68,player2Img);
 
       let preyImages = [basketballImg];
       //basketball = new Prey (5,30,7,0, basketballImg);
@@ -115,8 +115,8 @@
       nbaPlayer.handleEating(prey[i]);
       player2.handleEating (prey[i]);
       }
-      nbaPlayer.handleCollision (player2);
 
+nbaPlayer.handleCollision();
       // Display the player and the basketballs
       nbaPlayer.display();
       player2.display();

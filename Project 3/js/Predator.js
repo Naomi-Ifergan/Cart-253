@@ -10,7 +10,7 @@ class Predator {
   //
   // Sets the initial values for the Predator's properties
   // Either sets default values or uses the arguments provided
-  constructor(x, y, speed, radius,upKey,downKey,leftKey,rightKey,sprintKey,nbaPlayerImage) {
+  constructor(x, y, speed, radius,upKey,downKey,leftKey,rightKey,nbaPlayerImage) {
     // Position
     this.x = x;
     this.y = y;
@@ -30,8 +30,6 @@ class Predator {
     this.downKey = downKey;
     this.leftKey = leftKey
     this.rightKey = rightKey;
-    this.sprintKey = sprintKey; // space key
-    this.speedSprint = speed + 2;
     this.originalSpeed = speed;
     this.img = nbaPlayerImage;
     this.score = 0;
@@ -64,7 +62,7 @@ class Predator {
     }
 
     if(keyIsDown (this.sprintKey)){
-      this.speed=this.speed + 5;
+      this.speed=this.speed + 1;
     }
     }
 
@@ -135,7 +133,6 @@ class Predator {
     if (d < nbaPlayer.radius + player2.radius)
         state= "GAMEOVER"
     }
-
 
   // display1
   //
