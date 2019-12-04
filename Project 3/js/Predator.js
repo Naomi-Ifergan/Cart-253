@@ -121,10 +121,12 @@ class Predator {
       }
       }
       if (nbaPlayer.health < 0 ){
-        state = "GAMEOVER2"
+        state = "GAMEOVER"
+
       }
 if (player2.health<0) {
   state= "LOSTHEALTH"
+  DisplayGameover2();
 }
 
       }

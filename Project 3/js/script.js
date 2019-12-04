@@ -23,7 +23,7 @@
       //arrays
       //number of preys that will be simulated
       let prey = [];
-      let numPrey = 10;
+      let numPrey = 5;
 
       // introduction page
       let state = "TITLE";
@@ -64,9 +64,10 @@
 
       function convertSeconds(s){
         var min =floor (s /60);
-        var sec = s% 60;
+        var sec = s % 60;
         return nf(min,2) + ':' + nf(sec,2);
         var buzzer;
+        displayGameOver();
 
       }
 
@@ -81,7 +82,7 @@
       buzzer.play();
       clearInterval(interval);
       counter = 0;
-      displayGameOver();
+
 
     }
 }
@@ -149,6 +150,7 @@
 
 nbaPlayer.handleCollision(player2);
 
+
       // Display the player and the basketballs
       nbaPlayer.display();
       player2.display();
@@ -159,20 +161,26 @@ nbaPlayer.handleCollision(player2);
       if (nbaPlayer.health== 0) {
       state= "GAMEOVER"
       }
+    }
+
+    if (timeleft=0){
+      state= "GAMEOVER"
+      displayGameOver();
+
+    }
 
       }
 
-      else if (state === "GAMEOVER") {
+     if (state === "GAMEOVER") {
       displayGameOver();
 
         }
 
-        }
 
   function mousePressed() {
         if (state === "GAMEOVER") {
         // If we are on the gameover page, we want to play again
-          state = "PLAY";
+          state = "TITLE";
         }
         }
 
@@ -240,8 +248,8 @@ function displayGameOver(){
 
 
 }
-function lostHealth(){
-  //Gameover page
+function DisplayGameover2(){
+  //Gameover page when player loses health
   // buzzer sound when game is over
   buzzer.play();
   ellipseMode(CENTER);
@@ -253,7 +261,7 @@ function lostHealth(){
   text("GAMEOVER! \n You were too slow. \n Click to play again", width/2,height/2);
 }
 
-function timeIt(){
+function timer(){
 //timer
 rectangle(CENTER);
 fill(0);
