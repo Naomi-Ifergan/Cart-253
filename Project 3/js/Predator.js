@@ -60,10 +60,6 @@ class Predator {
     else {
       this.vy = 0;
     }
-
-    if(keyIsDown (this.sprintKey)){
-      this.speed=this.speed + 1;
-    }
     }
 
   // move
@@ -124,6 +120,13 @@ class Predator {
         prey.reset();
       }
       }
+      if (nbaPlayer.health < 0 ){
+        state = "GAMEOVER2"
+      }
+if (player2.health<0) {
+  state= "LOSTHEALTH"
+}
+
       }
 
   handleCollision(player2) {
@@ -132,6 +135,7 @@ class Predator {
     //collision between players=game
     if (d < nbaPlayer.radius + player2.radius)
         state= "GAMEOVER"
+
     }
 
   // display1
