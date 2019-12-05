@@ -120,9 +120,11 @@ class Predator {
         prey.reset();
       }
       }
-      if (nbaPlayer.health < 0 ){
-        {gameover_reason="health";state = "GAMEOVER";}
+
+      if (nbaPlayer.health < 1 ){
+        gameover_reason="health";state = "GAMEOVER";
       }
+
       }
 
   handleCollision(player2) {
@@ -130,7 +132,7 @@ class Predator {
     // Check if the distance is less than their two radii (an overlap)
     //collision between players=game
     if (d < nbaPlayer.radius + player2.radius)
-        {gameover_reason="collision";state= "GAMEOVER"; displayGameOver();}
+        {gameover_reason="collision";state= "GAMEOVER";}
     }
 
   // display
@@ -144,5 +146,6 @@ class Predator {
       image(this.img,this.x, this.y, this.radius * 2, this.radius * 2);
     }
     pop();
+
     }
     }
