@@ -121,7 +121,7 @@ class Predator {
       }
       }
       if (nbaPlayer.health < 0 ){
-        state = "GAMEOVER"
+        {gameover_reason="health";state = "GAMEOVER";}
       }
       }
 
@@ -130,7 +130,7 @@ class Predator {
     // Check if the distance is less than their two radii (an overlap)
     //collision between players=game
     if (d < nbaPlayer.radius + player2.radius)
-        state= "GAMEOVER"
+        {gameover_reason="collision";state= "GAMEOVER"; displayGameOver();}
     }
 
   // display

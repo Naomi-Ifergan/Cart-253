@@ -23,15 +23,18 @@
       //arrays
       //number of preys that will be simulated
       let prey = [];
-      let numPrey = 15;
+      let numPrey = 5;
 
       // introduction page
       let state = "TITLE";
-
+      let gameover_reason;
       //sound
       let cheering;
-
-
+      let buzzer;
+      var gamelength =60;
+      var timeleft=0;
+      var interval= setInterval(MyTimer, 1000);
+      clearInterval(interval);
   function preload(){
 
       //sound effects
@@ -55,39 +58,45 @@
       //
       // Sets up a canvas
       // Creates objects for the players
+function convertSeconds(s){
+        var min =floor (s /60);
+        var sec = s % 60;
+        return nf(min,2) + ':' + nf(sec,2);
+}
+function MyTimer(){
+  //alert('here');
+  timeleft--;
+  var timer= select('#timer');
+  timer.html(convertSeconds(timeleft));
+
+  //we want the time to count backwards so from 60 secs to 0
+  //Instead of counting up from 0 to 60 seconds
+  if (timeleft<1){
+      //buzzer.play();
+    //alert(timeleft);
+    clearInterval(interval);
+    gameover_reason="timeout";
+    displayGameOver();
+  }
+if(gameover_reason=='collision' || gameover_reason=='health') displayGameOver();
+}
+
 
   function setup() {
       createCanvas(windowWidth,windowHeight);
       cheering.play();
 
-      var counter =0;
-      var timeleft=60;
 
-      function convertSeconds(s){
-        var min =floor (s /60);
-        var sec = s % 60;
-        return nf(min,2) + ':' + nf(sec,2);
-        var buzzer;
-        displayGameOver();
 
-      }
+
 
       var timer= select('#timer');
-      timer.html(convertSeconds(timeleft-counter));
-        var interval= setInterval(timeIt, 1000);
+      timer.html(convertSeconds(gamelength));
+      timeleft=gamelength;
+      //var interval= setInterval(timeIt, 1000);
         //I want the event timeIt to happen every 1000 milliseconds
 
-  function timeIt(){
-    counter++;
-    timer.html(convertSeconds(timeleft-counter));
-    //we want the time to count backwards so from 60 secs to 0
-    //Instead of counting up from 0 to 60 seconds
-    if (counter==timeleft){
-      buzzer.play();
-      clearInterval(interval);
-      counter = 0;
-    }
-    }
+
 
 
       //set up players
@@ -127,6 +136,7 @@
       }
 
       if (state === "TITLE") {
+      //timeLeft=60;
        displayTitleScreen();
        // We will imagine we have a function to show the title stuff
       }
@@ -164,32 +174,38 @@
       }
       }
 
-    if (timeleft=0){
+    if (timeleft<1){
       state= "GAMEOVER"
       displayGameOver();
 
       }
       }
 
-     if (state === "GAMEOVER") {
+     if (state == "GAMEOVER") {
       displayGameOver();
       }
 
-
   function mousePressed() {
-        if (state === "GAMEOVER") {
-        // If we are on the gameover page, we want to play again
-          state = "TITLE";
-          displayTitleScreen();
-        }
-        }
-
-  function mousePressed() {
-        if (state === "TITLE") {
+//alert(state);
+        if (state == "TITLE") {
         // If we were on the title we need to switch to instructions
         state = "PLAY";
+        //alert('staring');
+        timeleft=gamelength;
+        interval= setInterval(MyTimer, 1000);
+        //alert('staringxx');
         }
+        if (state == "GAMEOVER")
+        {
+        // If we are on the gameover page, we want to play again
+          state = "TITLE";
+          timeleft=gamelength;
+          //alert(timeleft);
+
+          displayTitleScreen();
         }
+
+    }
 
     function displayScore (){
       //display the score throughout the game
@@ -211,47 +227,21 @@
       textSize(15);
       textAlign(CENTER,CENTER);
       fill(0);
-      text(" A MINUTE TO WIN IT! \n \n \n  Welcome to my court! \n You have 1 minute to beat your opponent. \n Player 1 use ARROW keys to move. \n Player 2 use WASD keys to move. \n \n Rules: \n Avoid collision between players. \n Catch as many balls before time runs out. \n If a player dies it's GAMEOVER. \n If a player injures his/her opponent, its GAMEOVER. \n \n  Click to play!\n ", width/2,height/2)
+      text(" A MINUTE TO WIN IT! \n \n \n  Welcome to my court! \n You have 1 minute to beat your opponent. \n Player 1 use ARROW keys to move. \n Player 2 use WASD keys to move. \n \n Rules: \n Avoid collision between players. \n Catch as many balls before time runs out. \n If a player dies it's GAMEOVER. \n If a player injures his/her opponent, it's GAMEOVER. \n \n  Click to play!\n ", width/2,height/2)
       pop();
       }
 
     function displayGameOver(){
       //Gameover page when clock runs out
       // buzzer sound when game is over
-      buzzer.play();
+      //buzzer.play();
       ellipseMode(CENTER);
       fill(204,0,0); //red
       ellipse(width/2,height/2,500,500);
       textSize(20);
       textAlign(CENTER,CENTER);
       fill(0);
-      text("GAMEOVER! \n You ran out of time. \n Seems like you couldn't beat you opponent. \n Click to play again", width/2,height/2);
-      }
-
-
-    function displayGameOver(){
-      //Gameover page when there's a collision beteen players
-      // buzzer sound when game is over
-      buzzer.play();
-      ellipseMode(CENTER);
-      fill(204,0,0); //red
-      ellipse(width/2,height/2,500,500);
-      textSize(20);
-      textAlign(CENTER,CENTER);
-      fill(0);
-      text("GAMEOVER! \n You injured your opponent. \n Click to play again", width/2,height/2);
-      }
-
-
-    function DisplayGameover2(){
-      //Gameover page when player loses health
-      // buzzer sound when game is over
-      buzzer.play();
-      ellipseMode(CENTER);
-      fill(204,0,0); //red
-      ellipse(width/2,height/2,500,500);
-      textSize(20);
-      textAlign(CENTER,CENTER);
-      fill(0);
-      text("GAMEOVER! \n You were too slow. \n Click to play again", width/2,height/2);
+      if (gameover_reason=="collision")   text("GAMEOVER! \n You injured your opponent. \n Click to play again", width/2,height/2);
+      if (gameover_reason=="health")      text("GAMEOVER! \n You were too slow. \n Click to play again", width/2,height/2);
+      if (gameover_reason=="timeout")     text("GAMEOVER! \n You ran out of time. \n Seems like you couldn't beat you opponent. \n Click to play again", width/2,height/2);
       }
