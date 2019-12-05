@@ -76,7 +76,7 @@ class Predator {
     this.health = constrain(this.health, 0, this.maxHealth);
     // Handle wrapping
     this.handleWrapping();
-  }
+    }
 
   // handleWrapping
   //
@@ -122,13 +122,7 @@ class Predator {
       }
       if (nbaPlayer.health < 0 ){
         state = "GAMEOVER"
-
       }
-if (player2.health<0) {
-  state= "LOSTHEALTH"
-  DisplayGameover2();
-}
-
       }
 
   handleCollision(player2) {
@@ -137,13 +131,10 @@ if (player2.health<0) {
     //collision between players=game
     if (d < nbaPlayer.radius + player2.radius)
         state= "GAMEOVER"
-
     }
 
-  // display1
+  // display
   //
-  // Draw the predator as an ellipse on the canvas
-  // with a radius the same size as its current health.
   display() {
     push();
     noStroke();

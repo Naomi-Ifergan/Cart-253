@@ -23,7 +23,7 @@
       //arrays
       //number of preys that will be simulated
       let prey = [];
-      let numPrey = 5;
+      let numPrey = 15;
 
       // introduction page
       let state = "TITLE";
@@ -34,9 +34,10 @@
 
   function preload(){
 
-    //sound effects
+      //sound effects
      cheering = loadSound(["assets/sounds/cheering.ogg"]);
      buzzer = loadSound (["assets/sounds/buzzer.ogg"]);
+
       //placing background image for the game
       courtBackground = loadImage('assets/images/court.jpg');
 
@@ -60,7 +61,7 @@
       cheering.play();
 
       var counter =0;
-      var timeleft=10;
+      var timeleft=60;
 
       function convertSeconds(s){
         var min =floor (s /60);
@@ -74,19 +75,19 @@
       var timer= select('#timer');
       timer.html(convertSeconds(timeleft-counter));
         var interval= setInterval(timeIt, 1000);
+        //I want the event timeIt to happen every 1000 milliseconds
 
   function timeIt(){
     counter++;
-    timer.html(convertSeconds(counter));
+    timer.html(convertSeconds(timeleft-counter));
+    //we want the time to count backwards so from 60 secs to 0
+    //Instead of counting up from 0 to 60 seconds
     if (counter==timeleft){
       buzzer.play();
       clearInterval(interval);
       counter = 0;
-
-
     }
-}
-
+    }
 
 
       //set up players
@@ -148,7 +149,7 @@
       player2.handleEating (prey[i]);
       }
 
-nbaPlayer.handleCollision(player2);
+      nbaPlayer.handleCollision(player2);
 
 
       // Display the player and the basketballs
@@ -161,26 +162,25 @@ nbaPlayer.handleCollision(player2);
       if (nbaPlayer.health== 0) {
       state= "GAMEOVER"
       }
-    }
+      }
 
     if (timeleft=0){
       state= "GAMEOVER"
       displayGameOver();
 
-    }
-
+      }
       }
 
      if (state === "GAMEOVER") {
       displayGameOver();
-
-        }
+      }
 
 
   function mousePressed() {
         if (state === "GAMEOVER") {
         // If we are on the gameover page, we want to play again
           state = "TITLE";
+          displayTitleScreen();
         }
         }
 
@@ -191,8 +191,6 @@ nbaPlayer.handleCollision(player2);
         }
         }
 
-
-
     function displayScore (){
       //display the score throughout the game
       textAlign(CENTER,CENTER);
@@ -202,7 +200,6 @@ nbaPlayer.handleCollision(player2);
       text("Team Blue:" + (nbaPlayer.score),1000,50);
       fill(204,0,0);
       text("Team Red:" + (player2.score),200,50);
-
       }
 
     function displayTitleScreen(){
@@ -219,7 +216,7 @@ nbaPlayer.handleCollision(player2);
       }
 
     function displayGameOver(){
-      //Gameover page
+      //Gameover page when clock runs out
       // buzzer sound when game is over
       buzzer.play();
       ellipseMode(CENTER);
@@ -229,45 +226,32 @@ nbaPlayer.handleCollision(player2);
       textAlign(CENTER,CENTER);
       fill(0);
       text("GAMEOVER! \n You ran out of time. \n Seems like you couldn't beat you opponent. \n Click to play again", width/2,height/2);
+      }
 
 
-}
+    function displayGameOver(){
+      //Gameover page when there's a collision beteen players
+      // buzzer sound when game is over
+      buzzer.play();
+      ellipseMode(CENTER);
+      fill(204,0,0); //red
+      ellipse(width/2,height/2,500,500);
+      textSize(20);
+      textAlign(CENTER,CENTER);
+      fill(0);
+      text("GAMEOVER! \n You injured your opponent. \n Click to play again", width/2,height/2);
+      }
 
 
-function displayGameOver(){
-  //Gameover page
-  // buzzer sound when game is over
-  buzzer.play();
-  ellipseMode(CENTER);
-  fill(204,0,0); //red
-  ellipse(width/2,height/2,500,500);
-  textSize(20);
-  textAlign(CENTER,CENTER);
-  fill(0);
-  text("GAMEOVER! \n You injured your opponent. \n Click to play again", width/2,height/2);
-
-
-}
-function DisplayGameover2(){
-  //Gameover page when player loses health
-  // buzzer sound when game is over
-  buzzer.play();
-  ellipseMode(CENTER);
-  fill(204,0,0); //red
-  ellipse(width/2,height/2,500,500);
-  textSize(20);
-  textAlign(CENTER,CENTER);
-  fill(0);
-  text("GAMEOVER! \n You were too slow. \n Click to play again", width/2,height/2);
-}
-
-function timer(){
-//timer
-rectangle(CENTER);
-fill(0);
-  fill (255);
-  textSize (40);
-  textAlign (CENTER,CENTER, 300,300);
-  text("Time Left: ");
-
-}
+    function DisplayGameover2(){
+      //Gameover page when player loses health
+      // buzzer sound when game is over
+      buzzer.play();
+      ellipseMode(CENTER);
+      fill(204,0,0); //red
+      ellipse(width/2,height/2,500,500);
+      textSize(20);
+      textAlign(CENTER,CENTER);
+      fill(0);
+      text("GAMEOVER! \n You were too slow. \n Click to play again", width/2,height/2);
+      }
