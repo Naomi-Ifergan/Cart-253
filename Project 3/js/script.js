@@ -39,12 +39,12 @@
       var timeleft=0;
       var interval= setInterval(MyTimer, 1000);
       clearInterval(interval);
-var test= select('#test');
+
   function preload(){
 
       //sound effects
-     cheering = loadSound(["assets/sounds/cheering.ogg"]);
-     buzzer = loadSound (["assets/sounds/buzzer.ogg"]);
+      cheering = loadSound(["assets/sounds/cheering.ogg"]);
+      buzzer = loadSound (["assets/sounds/buzzer.ogg"]);
 
       //placing background image for the game
       courtBackground = loadImage('assets/images/court.jpg');
@@ -64,27 +64,27 @@ var test= select('#test');
       // Sets up a canvas
       // Creates objects for the players
   function convertSeconds(s){
-        var min =floor (s /60);
-        var sec = s % 60;
-        return nf(min,2) + ':' + nf(sec,2);
-        }
+      var min =floor (s /60);
+      var sec = s % 60;
+      return nf(min,2) + ':' + nf(sec,2);
+      }
 
   function MyTimer(){
-    timeleft--;
-    var timer= select('#timer');
-    timer.html(convertSeconds(timeleft));
-    //we want the time to count backwards so from 60 secs to 0
-    //Instead of counting up from 0 to 60 seconds
+      timeleft--;
+      var timer= select('#timer');
+      timer.html(convertSeconds(timeleft));
+      //we want the time to count backwards so from 60 secs to 0
+      //Instead of counting up from 0 to 60 seconds
 
   if (timeleft<1){
       //buzzer.play();
-    clearInterval(interval);
-    gameover_reason="timeout";
-    displayGameOver();
-    }
+      clearInterval(interval);
+      gameover_reason="timeout";
+      displayGameOver();
+      }
 
-    if(gameover_reason=='collision' || gameover_reason=='health') {clearInterval(interval);displayGameOver();}
-    }
+      if(gameover_reason=='collision' || gameover_reason=='health') {clearInterval(interval);displayGameOver();}
+      }
 
 
   function setup() {
@@ -165,49 +165,47 @@ var test= select('#test');
       player2.display();
 
       //display the nbaPlayer's Score
-    displayScore();
+      displayScore();
       if (nbaPlayer.health== 0) {
       state= "GAMEOVER";
       }
+      }
 
+      else if(state=="GAMEOVER") {displayGameOver();}
 
-    }//end of player
-    else if(state=="GAMEOVER") {displayGameOver();}
-
-    if (timeleft<1){
+      if (timeleft<1){
       state= "GAMEOVER"
       displayGameOver();
       }
-
       }
 
-     if (state == "GAMEOVER") {
+      if (state == "GAMEOVER") {
       displayGameOver();
       }
 
   function mousePressed() {
-        if (state == "TITLE") {
-        // If we were on the title we need to switch to instructions
-        state = "PLAY";
-        gameover_reason='';
-        //set up players
-        nbaPlayer = new Predator(1100, 500, 5, 100,UP_ARROW,DOWN_ARROW,LEFT_ARROW,RIGHT_ARROW,nbaPlayerImg);
-        player2 = new Predator (200,500,5,100,87,83,65,68,player2Img);
+      if (state == "TITLE") {
+      // If we were on the title we need to switch to instructions
+      state = "PLAY";
+      gameover_reason='';
+      //set up players
+      nbaPlayer = new Predator(1100, 500, 5, 100,UP_ARROW,DOWN_ARROW,LEFT_ARROW,RIGHT_ARROW,nbaPlayerImg);
+      player2 = new Predator (200,500,5,100,87,83,65,68,player2Img);
 
-        timeleft=gamelength;
-        interval= setInterval(MyTimer, 1000);
-        }
-        if (state == "GAMEOVER")
-        {
-        // If we are on the gameover page, we want to play again
-          state = "TITLE";
-          timeleft=gamelength;
-          //gameover_reason='';
+      timeleft=gamelength;
+      interval= setInterval(MyTimer, 1000);
+      }
+      if (state == "GAMEOVER")
+      {
+      // If we are on the gameover page, we want to play again
+      state = "TITLE";
+      timeleft=gamelength;
+      //gameover_reason='';
 
 
-          displayTitleScreen();
-        }
-        }
+      displayTitleScreen();
+      }
+      }
 
     function displayScore (){
       //display the score throughout the game
@@ -247,5 +245,7 @@ var test= select('#test');
       if (gameover_reason=="collision")   text("GAMEOVER! \n You injured your opponent. \n Click to play again", width/2,height/2);
       if (gameover_reason=="health")      text("GAMEOVER! \n You were too slow. \n You failed to catch any basketballs. \n Click to play again", width/2,height/2);
       if (gameover_reason=="timeout")     text("GAMEOVER! \n You ran out of time. \n Seems like you couldn't beat you opponent. \n Click to play again", width/2,height/2);
-buzzer.play();
+
+      //buzzer noise when gameover
+      buzzer.play();
       }

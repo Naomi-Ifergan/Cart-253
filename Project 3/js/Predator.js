@@ -105,10 +105,10 @@ class Predator {
   // overlaps it. If so, reduces the prey's health and increases
   // the predator's. If the prey dies, it gets reset.
   handleEating(prey) {
-    // Calculate distance from this predator to the prey
-    let d = dist(this.x, this.y, prey.x, prey.y);
-    // Check if the distance is less than their two radii (an overlap)
-    if (d < this.radius + prey.radius) {
+      // Calculate distance from this predator to the prey
+      let d = dist(this.x, this.y, prey.x, prey.y);
+      // Check if the distance is less than their two radii (an overlap)
+      if (d < this.radius + prey.radius) {
       // Increase predator health and constrain it to its possible range
       this.health += this.healthGainPerEat;
       this.health = constrain(this.health, 0, this.maxHealth);
@@ -128,24 +128,23 @@ class Predator {
       }
 
   handleCollision(player2) {
-    let d = dist(this.x, this.y, player2.x, player2.y);
-    // Check if the distance is less than their two radii (an overlap)
-    //collision between players=game
-    if (d < nbaPlayer.radius + player2.radius)
+      let d = dist(this.x, this.y, player2.x, player2.y);
+      // Check if the distance is less than their two radii (an overlap)
+      //collision between players=game
+      if (d < nbaPlayer.radius + player2.radius)
         {gameover_reason="collision";state= "GAMEOVER";}
-    }
+      }
 
   // display
   //
   display() {
-    push();
-    noStroke();
-    imageMode(CENTER);
-    this.radius = this.health;
-    if (this.radius > 1){
+      push();
+      noStroke();
+      imageMode(CENTER);
+      this.radius = this.health;
+      if (this.radius > 1){
       image(this.img,this.x, this.y, this.radius * 2, this.radius * 2);
-    }
-    pop();
-
-    }
-    }
+      }
+      pop();
+      }
+      }
