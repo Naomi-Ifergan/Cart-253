@@ -23,7 +23,7 @@
       //arrays
       //number of preys that will be simulated
       let prey = [];
-      let numPrey = 1;
+      let numPrey = 10;
 
       // introduction page
       let state = "TITLE";
@@ -247,5 +247,5 @@ var test= select('#test');
       if (gameover_reason=="collision")   text("GAMEOVER! \n You injured your opponent. \n Click to play again", width/2,height/2);
       if (gameover_reason=="health")      text("GAMEOVER! \n You were too slow. \n You failed to catch any basketballs. \n Click to play again", width/2,height/2);
       if (gameover_reason=="timeout")     text("GAMEOVER! \n You ran out of time. \n Seems like you couldn't beat you opponent. \n Click to play again", width/2,height/2);
-
+buzzer.play();
       }
