@@ -3,7 +3,7 @@
       //
       // This game is based on real life basketball.
       // However, the players only have 1 minute to score as much as he can before time runs out!
-      //There are 3 ways of losing;
+      // There are 3 ways of losing;
       // 1. "Injuring" your opponent (coming into the same radius as the other player)
       // 2. When the the clock runs out of timeout
       // 3. When one of the player's health = 0
@@ -228,7 +228,7 @@
       textSize(15);
       textAlign(CENTER,CENTER);
       fill(0);
-      text(" A MINUTE TO WIN IT! \n \n \n  Welcome to my court! \n You have 1 minute to beat your opponent. \n Player 1 use ARROW keys to move. \n Player 2 use WASD keys to move. \n \n Rules: \n Avoid collision between players. \n Catch as many balls before time runs out. \n If a player dies it's GAMEOVER. \n If a player injures his/her opponent, it's GAMEOVER. \n \n  Click to play!\n ", width/2,height/2)
+      text(" A MINUTE TO WIN IT! \n \n \n  Welcome to my court! \n You have 1 minute to beat your opponent. \n Player 1 use ARROW keys to move. \n Player 2 use WASD keys to move. \n \n Rules: \n Avoid collision between players. \n Catch as many balls before time runs out. \n If a player dies it's GAMEOVER. \n If a player injures his/her opponent, it's GAMEOVER. \n \n Turn sound on for full gaming experience. \n Do not exceed volume 30 for safe listening. \n \n Click to play!\n ", width/2,height/2)
       pop();
       }
 
@@ -242,9 +242,18 @@
       textSize(20);
       textAlign(CENTER,CENTER);
       fill(0);
-      if (gameover_reason=="collision")   text("GAMEOVER! \n You injured your opponent. \n Click to play again", width/2,height/2);
-      if (gameover_reason=="health")      text("GAMEOVER! \n You were too slow. \n You failed to catch any basketballs. \n Click to play again", width/2,height/2);
-      if (gameover_reason=="timeout")     text("GAMEOVER! \n You ran out of time. \n Seems like you couldn't beat you opponent. \n Click to play again", width/2,height/2);
+
+      if (gameover_reason=="collision")
+      text("GAMEOVER! \n You injured your opponent. \n Click to play again", width/2,height/2);
+      "Team Blue:" + (nbaPlayer.score); "Team Red:" + (player2.score);
+
+      if (gameover_reason=="health")
+      text("GAMEOVER! \n You were too slow. \n You failed to catch any basketballs. \n Click to play again", width/2,height/2);
+      "Team Blue:" + (nbaPlayer.score); "Team Red:" + (player2.score);
+
+      if (gameover_reason=="timeout")
+      text("GAMEOVER! \n You ran out of time. \n Seems like you couldn't beat you opponent. \n Click to play again", width/2,height/2);
+      "Team Blue:" + (nbaPlayer.score); "Team Red:" + (player2.score);
 
       //buzzer noise when gameover
       buzzer.play();
